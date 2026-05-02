@@ -5,7 +5,7 @@ import { getTemplateComponent } from './CardTemplates';
 import {
   Image as ImageIcon, Download, ArrowLeft, Wand2, RefreshCw,
   Calendar, User, AlignLeft, Upload, QrCode, Type, Sparkles, Plus, Trash2, Layers,
-  Maximize2, Minimize2, ZoomIn, ZoomOut, RotateCcw
+  Maximize2, Minimize2, ZoomIn, ZoomOut, RotateCcw, Check
 } from 'lucide-react';
 import AIGenerator from './AIGenerator';
 import ImageCropper from './ImageCropper';
@@ -17,6 +17,7 @@ interface EditorProps {
   data: PostcardData;
   updateData: (key: keyof PostcardData, value: any) => void;
   onBack: () => void;
+  onSaveToGallery: (imgDataUrl: string, height: number) => void;
 }
 
 interface CroppingState {
@@ -26,10 +27,11 @@ interface CroppingState {
   aspectRatio: number;
 }
 
-const Editor: React.FC<EditorProps> = ({ data, updateData, onBack }) => {
+const Editor: React.FC<EditorProps> = ({ data, updateData, onBack, onSaveToGallery }) => {
   const [showAI, setShowAI] = useState(false);
   const [showImageGen, setShowImageGen] = useState(false);
   const [isExporting, setIsExporting] = useState(false);
+  const [savedToast, setSavedToast] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
   const [croppingFile, setCroppingFile] = useState<CroppingState | null>(null);
   const [isCanvasMode, setIsCanvasMode] = useState(false);
@@ -167,6 +169,11 @@ const Editor: React.FC<EditorProps> = ({ data, updateData, onBack }) => {
       link.download = `postcard-${data.templateId}-${Date.now()}.${downloadFormat}`;
       link.href = dataUrl;
       link.click();
+      // Save to gallery with natural aspect-ratio-based height
+      const naturalHeight = cardRef.current.getBoundingClientRect().height;
+      onSaveToGallery(dataUrl, naturalHeight);
+      setSavedToast(true);
+      setTimeout(() => setSavedToast(false), 2500);
     } catch (err) {
       console.error('Export failed', err);
     } finally {
@@ -499,8 +506,14 @@ const Editor: React.FC<EditorProps> = ({ data, updateData, onBack }) => {
           </div>
           <button onClick={handleDownload} disabled={isExporting} className="w-full bg-gray-900 hover:bg-black text-white py-3.5 rounded-xl font-bold text-sm flex items-center justify-center gap-3 shadow-lg transition-all disabled:opacity-70">
             {isExporting ? <RefreshCw className="animate-spin" size={18} /> : <Download size={18} />}
-            {isExporting ? "Exporting..." : "Download Postcard"}
+            {isExporting ? "Exporting..." : "Download & Save"}
           </button>
+          {savedToast && (
+            <div className="mt-2 flex items-center justify-center gap-2 text-emerald-600 text-xs font-bold animate-fade-in">
+              <Check size={14} className="text-emerald-500" />
+              Saved to Gallery!
+            </div>
+          )}
         </div>
       </div>
 

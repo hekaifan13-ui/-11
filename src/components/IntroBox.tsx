@@ -3,17 +3,19 @@ import { AppState, TemplateId } from '../types';
 import { TEMPLATES } from '../constants';
 import {
   Sparkles, MousePointer, Code, Image as ImageIcon, Package,
-  X, Grid
+  X, Grid, Images
 } from 'lucide-react';
 
 interface IntroBoxProps {
   onOpen: () => void;
   onClose: () => void;
   onSelectTemplate: (id: TemplateId) => void;
+  onOpenGallery: () => void;
+  galleryCount: number;
   appState: AppState;
 }
 
-const IntroBox: React.FC<IntroBoxProps> = ({ onOpen, onClose, onSelectTemplate, appState }) => {
+const IntroBox: React.FC<IntroBoxProps> = ({ onOpen, onClose, onSelectTemplate, onOpenGallery, galleryCount, appState }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
@@ -156,6 +158,22 @@ const IntroBox: React.FC<IntroBoxProps> = ({ onOpen, onClose, onSelectTemplate, 
           <div className="bg-white p-1 rounded-full group-hover:rotate-90 transition-transform duration-300">
             <X size={14} />
           </div>
+        </button>
+      </div>
+
+      {/* Gallery Button */}
+      <div className="absolute top-8 left-8 z-50">
+        <button
+          onClick={onOpenGallery}
+          className="group flex items-center gap-2.5 px-4 py-2 bg-white/60 hover:bg-white/80 backdrop-blur-xl rounded-full text-slate-600 transition-all border border-white/50 shadow-sm hover:shadow-lg cursor-pointer"
+        >
+          <Images size={16} className="text-slate-500 group-hover:text-indigo-600 transition-colors" />
+          <span className="text-xs font-bold uppercase tracking-wider">Gallery</span>
+          {galleryCount > 0 && (
+            <span className="bg-indigo-500 text-white text-[10px] font-black w-5 h-5 rounded-full flex items-center justify-center shadow-sm">
+              {galleryCount > 99 ? '99+' : galleryCount}
+            </span>
+          )}
         </button>
       </div>
 

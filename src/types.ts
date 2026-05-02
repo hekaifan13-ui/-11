@@ -3,7 +3,8 @@ export enum AppState {
   INTRO = 'INTRO',
   SELECTION = 'SELECTION',
   EDITOR = 'EDITOR',
-  PREVIEW = 'PREVIEW'
+  PREVIEW = 'PREVIEW',
+  GALLERY = 'GALLERY'
 }
 
 export enum TemplateId {
@@ -50,4 +51,12 @@ export interface TemplateConfig {
   name: string;
   description: string;
   previewColor: string;
+}
+
+export interface GalleryItem {
+  id: string;
+  img: string;
+  height: number;
+  templateId: TemplateId;
+  createdAt: string;
 }
