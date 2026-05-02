@@ -1,7 +1,7 @@
 
 import React, { forwardRef, useState } from 'react';
 import { PostcardData, TemplateId } from '../types';
-import { Feather, FileCode, GitBranch, Search, Settings, Layout, QrCode, User, Image as ImageIcon } from 'lucide-react';
+import { Feather, FileCode, GitBranch, Search, Settings, LayoutDashboard, QrCode, User, Image as ImageIcon } from 'lucide-react';
 
 interface TemplateProps {
   data: PostcardData;
@@ -182,7 +182,7 @@ const CodeTemplate = forwardRef<HTMLDivElement, TemplateProps>(({ data, scale = 
         </div>
         <div className="ml-8 text-gray-400 text-sm flex items-center gap-8 bg-black/20 rounded-md px-4 py-1.5">
           <div className="flex items-center gap-2 text-white/90"><FileCode size={16} className="text-blue-400" /> profile.tsx</div>
-          <div className="flex items-center gap-2 hover:bg-white/5 px-2 rounded"><Layout size={16} /> preview</div>
+          <div className="flex items-center gap-2 hover:bg-white/5 px-2 rounded"><LayoutDashboard size={16} /> preview</div>
         </div>
       </div>
       <div className="flex flex-1 min-h-0">

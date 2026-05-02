@@ -2,8 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { AppState, TemplateId } from '../types';
 import { TEMPLATES } from '../constants';
 import {
-  Sparkles, MousePointerClick, Code, Image as ImageIcon, Box,
-  X, LayoutGrid
+  Sparkles, MousePointer, Code, Image as ImageIcon, Package,
+  X, Grid
 } from 'lucide-react';
 
 interface IntroBoxProps {
@@ -161,7 +161,7 @@ const IntroBox: React.FC<IntroBoxProps> = ({ onOpen, onClose, onSelectTemplate, 
 
       <div className={`absolute top-12 transition-all duration-700 z-10 flex flex-col items-center pointer-events-none ${isOpen ? 'opacity-0 -translate-y-10' : 'opacity-100 translate-y-0'}`}>
         <div className="bg-white/60 backdrop-blur-md px-5 py-2 rounded-full text-xs font-bold tracking-widest uppercase text-slate-600 border border-white/60 shadow-sm mb-6 flex items-center gap-2">
-          <LayoutGrid size={14} className="text-cyan-600" /> The Collection
+          <Grid size={14} className="text-cyan-600" /> The Collection
         </div>
         <h1 className="text-6xl md:text-8xl font-serif text-slate-800 tracking-tighter drop-shadow-sm mb-3 opacity-90">
           Memories
@@ -237,7 +237,7 @@ const IntroBox: React.FC<IntroBoxProps> = ({ onOpen, onClose, onSelectTemplate, 
             <div className="absolute inset-0 bg-white/20 backdrop-blur-2xl border-2 border-white/60 rounded-2xl flex items-center justify-center overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.1)]">
               <div className="absolute inset-0 bg-gradient-to-tr from-white/60 via-transparent to-transparent opacity-70"></div>
               <div className="relative border border-white/50 px-12 py-10 rounded-xl flex flex-col items-center backdrop-blur-lg shadow-[inset_0_0_40px_rgba(255,255,255,0.4)] bg-white/10">
-                <Box size={48} className="text-white drop-shadow-lg mb-4 opacity-90" strokeWidth={1} />
+                <Package size={48} className="text-white drop-shadow-lg mb-4 opacity-90" strokeWidth={1} />
                 <span className="text-4xl font-serif text-white font-bold tracking-[0.25em] drop-shadow-xl">ACRYLIC</span>
                 <div className="w-12 h-[1px] bg-white/70 my-3"></div>
                 <span className="text-[9px] text-white uppercase tracking-[0.4em] font-medium drop-shadow-md">Box of Memories</span>
@@ -263,7 +263,7 @@ const IntroBox: React.FC<IntroBoxProps> = ({ onOpen, onClose, onSelectTemplate, 
 
       <div className={`absolute bottom-12 transition-all duration-500 delay-200 z-50 pointer-events-none ${isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
         <div className="bg-white/70 backdrop-blur-lg px-6 py-3 rounded-full flex items-center gap-3 text-slate-700 shadow-2xl border border-white">
-          <MousePointerClick size={16} className="text-cyan-600 animate-bounce" />
+          <MousePointer size={16} className="text-cyan-600 animate-bounce" />
           <span className="text-[11px] font-bold uppercase tracking-widest text-slate-600">Select a template</span>
         </div>
       </div>
