@@ -1,0 +1,1 @@
+console.log('WaytoAGI Editor Preload Loaded');
